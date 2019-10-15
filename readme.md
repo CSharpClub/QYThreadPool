@@ -28,7 +28,7 @@
 >欢迎任何有益的贡献，有问题欢迎开启 Issue
 
 
-## 示例代码
+## 示例代码 1
 ``` C#
 using System;
 using QY.ThreadPool;
@@ -96,4 +96,21 @@ public class TestThreadPool{
     }
     
 }
+```
+
+## 示例代码 2
+``` C#
+    
+    static void Main (string[] args) {
+        //设置线程池
+        ThreadPoolManager threadPoolManager = new ThreadPoolManager(65535);
+        ThreadPool.ThreadPool threadPool = threadPoolManager.CreateThreadPool(8192);
+        ThreadPoolManager.defaultManager = threadPoolManager;
+        ThreadPoolManager.defaultPool = threadPool;
+        threadPoolManager.Init();
+
+        //在程序中的其他任意位置，都可以通过
+        // ThreadPoolManager.defaultManager 这个获取默认的线程池管理器
+        // ThreadPoolManager.defaultPool 这个获取默认的线程池
+    }
 ```
