@@ -9,6 +9,22 @@ namespace QY.ThreadPool{
     /// </summary>
     public class ThreadPoolManager {
         /// <summary>
+        /// 获取或设置默认线程池管理器
+        /// 
+        /// 必须在自己项目中自行生成对象并设置后其他地方获取
+        /// </summary>
+        /// <value></value>
+        public static ThreadPoolManager defaultManager{get; set;}
+
+        /// <summary>
+        /// 获取或设置默认线程池
+        /// 
+        /// 必须在自己项目中自行生成对象并设置后其他地方获取
+        /// </summary>
+        /// <value></value>
+        public static ThreadPool defaultPool {get;set;}
+
+        /// <summary>
         /// 线程同步锁
         /// </summary>
         /// <returns></returns>
