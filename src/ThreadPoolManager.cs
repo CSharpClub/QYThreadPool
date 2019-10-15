@@ -108,6 +108,7 @@ namespace QY.ThreadPool{
         public void Init(){
             Thread thread = new Thread(this.DoWork);
             thread.IsBackground = true;
+            thread.Name = "QYThreadPool";
             thread.Start();
         }
 
