@@ -35,12 +35,12 @@
 
 ### 文件引用方式
     这个方式不会生成新的 dll 文件。但是需要自行维护新添加的文件
-    
+
 ``` XML
     <!-- QYThreadPool - Start -->
-    <Compile Include="QYThreadPool\src\ThreadEntity.cs" />
-    <Compile Include="QYThreadPool\src\ThreadPool.cs" />
-    <Compile Include="QYThreadPool\src\ThreadPoolManager.cs" />
+    <Compile Include="QYThreadPool\src\QYThreadEntity.cs" />
+    <Compile Include="QYThreadPool\src\QYThreadPool.cs" />
+    <Compile Include="QYThreadPool\src\QYThreadPoolManager.cs" />
     <!-- QYThreadPool - End -->
 ```
 

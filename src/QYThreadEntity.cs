@@ -5,7 +5,7 @@ namespace QY.ThreadPool{
     /// <summary>
     /// 线程实体类
     /// </summary>
-    public class ThreadEntity{
+    public class QYThreadEntity{
         /// <summary>
         /// 移除这个实体的时间
         /// 

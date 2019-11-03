@@ -7,14 +7,14 @@ namespace QY.ThreadPool{
     /// 
     /// 用于管理线程池
     /// </summary>
-    public class ThreadPoolManager {
+    public class QYThreadPoolManager {
         /// <summary>
         /// 获取或设置默认线程池管理器
         /// 
         /// 必须在自己项目中自行生成对象并设置后其他地方获取
         /// </summary>
         /// <value></value>
-        public static ThreadPoolManager defaultManager{get; set;}
+        public static QYThreadPoolManager defaultManager{get; set;}
 
         /// <summary>
         /// 获取或设置默认线程池
@@ -22,7 +22,7 @@ namespace QY.ThreadPool{
         /// 必须在自己项目中自行生成对象并设置后其他地方获取
         /// </summary>
         /// <value></value>
-        public static ThreadPool defaultPool {get;set;}
+        public static QYThreadPool defaultPool {get;set;}
 
         /// <summary>
         /// 线程同步锁
@@ -36,7 +36,7 @@ namespace QY.ThreadPool{
         /// </summary>
         /// <typeparam name="Thread"></typeparam>
         /// <returns></returns>
-        protected LinkedList<ThreadEntity> idleThreadList = new LinkedList<ThreadEntity>();
+        protected LinkedList<QYThreadEntity> idleThreadList = new LinkedList<QYThreadEntity>();
 
         /// <summary>
         /// 线程池列表
@@ -44,7 +44,7 @@ namespace QY.ThreadPool{
         /// </summary>
         /// <typeparam name="ThreadPool"></typeparam>
         /// <returns></returns>
-        protected List<ThreadPool> threadPoolList = new List<ThreadPool>();
+        protected List<QYThreadPool> threadPoolList = new List<QYThreadPool>();
 
         /// <summary>
         /// 待机线程数量
@@ -85,7 +85,7 @@ namespace QY.ThreadPool{
         /// 线程池管理器构造方法
         /// </summary>
         /// <param name="maxThreadCount">所有线程池最大线程数</param>
-        public ThreadPoolManager(int maxThreadCount){
+        public QYThreadPoolManager(int maxThreadCount){
             this.maxThreadCount = maxThreadCount;
         }
 
@@ -94,8 +94,8 @@ namespace QY.ThreadPool{
         /// </summary>
         /// <param name="maxThreadCount"></param>
         /// <returns></returns>
-        public ThreadPool CreateThreadPool(int maxThreadCount){
-            ThreadPool threadPool = new ThreadPool(this, maxThreadCount);
+        public QYThreadPool CreateThreadPool(int maxThreadCount){
+            QYThreadPool threadPool = new QYThreadPool(this, maxThreadCount);
             this.threadPoolList.Add(threadPool);
             return threadPool;
         }
@@ -129,7 +129,7 @@ namespace QY.ThreadPool{
 
                 lock(this.lockObj){
                     for(int i = 0; i < this.threadPoolList.Count; i++){
-                        ThreadPool threadPool = this.threadPoolList[i];
+                        QYThreadPool threadPool = this.threadPoolList[i];
                         if(!threadPool.isFullLoad){//如果这个线程还未满负载
                             threadPool.DoWork();//让线程执行工作
                         }
@@ -142,15 +142,15 @@ namespace QY.ThreadPool{
         /// 请求线程
         /// </summary>
         /// <returns></returns>
-        public ThreadEntity RequestThread(){
-            ThreadEntity threadEntity = null;
+        public QYThreadEntity RequestThread(){
+            QYThreadEntity threadEntity = null;
             lock(this.lockObj){
                 if(this.idleCount > 0){//如果有空闲线程
                     threadEntity = this.idleThreadList.First.Value;
                     this.idleThreadList.RemoveFirst();
                 }else{//如果没有空闲线程
                     if(!this.isFullLoad){//如果当前管理器还未满负载
-                        threadEntity = new ThreadEntity();
+                        threadEntity = new QYThreadEntity();
                         threadEntity.init();
                         this.runningThreadCount++;
                     }
@@ -164,7 +164,7 @@ namespace QY.ThreadPool{
         /// 回收线程
         /// </summary>
         /// <param name="entity"></param>
-        public void StoreThread(ThreadEntity entity){
+        public void StoreThread(QYThreadEntity entity){
             if(entity != null){//不信任态度
                 lock(this.lockObj){
                     this.idleThreadList.AddLast(entity);

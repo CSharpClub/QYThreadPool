@@ -5,7 +5,7 @@ namespace QY.ThreadPool{
     /// <summary>
     /// 线程池
     /// </summary>
-    public class ThreadPool{
+    public class QYThreadPool{
         /// <summary>
         /// 线程同步锁
         /// </summary>
@@ -15,7 +15,7 @@ namespace QY.ThreadPool{
         /// <summary>
         /// 线程池管理
         /// </summary>
-        private ThreadPoolManager manager;
+        private QYThreadPoolManager manager;
 
         /// <summary>
         /// 最大线程数量
@@ -57,7 +57,7 @@ namespace QY.ThreadPool{
         /// </summary>
         /// <param name="manager"></param>
         /// <param name="maxThreadCount"></param>
-        public ThreadPool(ThreadPoolManager manager, int maxThreadCount){
+        public QYThreadPool(QYThreadPoolManager manager, int maxThreadCount){
             this.manager = manager;
             this.maxThreadCount = maxThreadCount;
         }
@@ -85,7 +85,7 @@ namespace QY.ThreadPool{
         /// 执行线程池工作
         /// </summary>
         public void DoWork(){
-            ThreadEntity entity = null;
+            QYThreadEntity entity = null;
             Action task = null;
             lock(this.lockObj){
                 //每次仅仅提取一个任务出来，有多个任务时，等待下次循环再获取
