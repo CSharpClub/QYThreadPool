@@ -28,6 +28,22 @@
 >欢迎任何有益的贡献，有问题欢迎开启 Issue
 
 
+## 使用方式
+
+### 项目依赖方式
+    这个方式就是 clone 之后用导入已存在项目方式添加依赖关系，将会生成新的 Dll 文件
+
+### 文件引用方式
+    这个方式不会生成新的 dll 文件。但是需要自行维护新添加的文件
+    
+``` XML
+    <!-- QYThreadPool - Start -->
+    <Compile Include="QYThreadPool\src\ThreadEntity.cs" />
+    <Compile Include="QYThreadPool\src\ThreadPool.cs" />
+    <Compile Include="QYThreadPool\src\ThreadPoolManager.cs" />
+    <!-- QYThreadPool - End -->
+```
+
 ## 示例代码 1
 ``` C#
 using System;
