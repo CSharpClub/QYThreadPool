@@ -127,12 +127,10 @@ namespace QY.ThreadPool{
                 //等待一个消息
                 autoEvent.WaitOne();
 
-                lock(this.lockObj){
-                    for(int i = 0; i < this.threadPoolList.Count; i++){
-                        QYThreadPool threadPool = this.threadPoolList[i];
-                        if(!threadPool.isFullLoad){//如果这个线程还未满负载
-                            threadPool.DoWork();//让线程执行工作
-                        }
+                for(int i = 0; i < this.threadPoolList.Count; i++){
+                    QYThreadPool threadPool = this.threadPoolList[i];
+                    if(!threadPool.isFullLoad){//如果这个线程还未满负载
+                        threadPool.DoWork();//让线程执行工作
                     }
                 }
             }
